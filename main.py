@@ -11,10 +11,12 @@ api_key = 'f3a0fe3a-b07e-4840-a1da-06f18b2ddf13'
 geo_api_key = '40d1649f-0493-4b70-98ba-98533de7710b'
 
 
+
 class Window(QWidget):
     def __init__(self):
-        self.z = 10
-        self.params = {'ll': '37.617698,55.755864',
+        self.z = 8
+        self.ll = ['-71.699362', '18.873402']
+        self.params = {'ll': f'{self.ll[0]},{self.ll[1]}',
                        'size': '600,450',
                        'z': f'{self.z}',
                        'theme': 'light'}
@@ -66,21 +68,24 @@ class Window(QWidget):
         if self.z + 1 != 21:
             if event.key() == Qt.Key.Key_PageUp:
                 self.z += 1
-                self.params = {'ll': '37.617698,55.755864',
-                          'size': '600,450',
-                          'z': f'{self.z}'}
+                self.params = {'ll': f'{self.ll[0]},{self.ll[1]}',
+                               'size': '600,450',
+                               'z': f'{self.z}',
+                               'theme': 'light'}
                 self.get_image()
                 self.pixmap = QPixmap(self.map_file)
                 self.image.setPixmap(self.pixmap)
         if self.z - 1 != 0:
             if event.key() == Qt.Key.Key_Down:
                 self.z -= 1
-                self.params = {'ll': '37.617698,55.755864',
-                          'size': '600,450',
-                          'z': f'{self.z}'}
+                self.params = {'ll': f'{self.ll[0]},{self.ll[1]}',
+                               'size': '600,450',
+                               'z': f'{self.z}',
+                               'theme': 'light'}
                 self.get_image()
                 self.pixmap = QPixmap(self.map_file)
                 self.image.setPixmap(self.pixmap)
+            #if event.key() == Qt.Key.Key_Down:
 
 
 
