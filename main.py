@@ -15,7 +15,7 @@ class Window(QWidget):
         self.initUI()
 
     def get_image(self):
-        response = requests.get(f'http://static-maps.yandex.ru/v1?apikey={api_key}&ll=37.617698,55.755864&lang=ru_RU&pt=37.439194,55.81782~37.55787,55.711939~37.559353,55.791137&size=450,450&z=10')
+        response = requests.get(f'http://static-maps.yandex.ru/v1?apikey={api_key}&ll=37.617698,55.755864&lang=ru_RU&size=600,450&z=10')
         if response:
             self.map_file = 'map.png'
             with open(self.map_file, 'wb') as file:
@@ -25,11 +25,11 @@ class Window(QWidget):
             sys.exit(1)
 
     def initUI(self):
-        self.setGeometry(300, 300, 500, 500)
+        self.setGeometry(0, 0, 525, 600)
         self.setWindowTitle('Карта')
         self.pixmap = QPixmap(self.map_file)
         self.image = QLabel(self)
-        self.image.move(0, 0)
+        self.image.move(20, 0)
         self.image.resize(500, 500)
         self.image.setPixmap(self.pixmap)
 
