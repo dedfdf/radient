@@ -28,7 +28,6 @@ class Window(QWidget):
 
     def get_image(self):
         response = requests.get(api_server, params=self.params)
-        print(response)
         if response:
             self.map_file = 'map.png'
             with open(self.map_file, 'wb') as file:
@@ -84,12 +83,12 @@ class Window(QWidget):
         self.pocht_adres_field.resize(460, 35)
 
         self.on_pocht_adres = QRadioButton('Включить отображение почтового индекса', self)
-        self.on_pocht_adres.setChecked(True)
         self.on_pocht_adres.move(0, 615)
         self.on_pocht_adres.clicked.connect(self.display_pocht_adres_field)
         self.off_pocht_adres = QRadioButton('Выключить отображение почтового индекса', self)
         self.off_pocht_adres.move(0, 645)
         self.off_pocht_adres.clicked.connect(self.display_pocht_adres_field)
+
 
     def display_pocht_adres_field(self):
         if self.on_pocht_adres.isChecked():
