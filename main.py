@@ -160,7 +160,10 @@ class Window(QWidget):
                 if new_pt not in self.pt:
                     self.pt.append(new_pt)
 
-                self.pocht_adres_field.setText(json_response["response"]["GeoObjectCollection"]["featureMember"][0]['GeoObject']['metaDataProperty']['GeocoderMetaData']['Address']['postal_code'])
+                if 'postal_code' in json_response["response"]["GeoObjectCollection"]["featureMember"][0]['GeoObject']['metaDataProperty']['GeocoderMetaData']['Address']:
+                    self.pocht_adres_field.setText(json_response["response"]["GeoObjectCollection"]["featureMember"][0]['GeoObject']['metaDataProperty']['GeocoderMetaData']['Address']['postal_code'])
+                else:
+                    self.pocht_adres_field.setText('У этого объекта нет почтового адреса')
                 self.adres_field.setText(json_response["response"]["GeoObjectCollection"]["featureMember"][0]['GeoObject']['metaDataProperty']['GeocoderMetaData']['text'])
 
                 self.update()
@@ -170,14 +173,15 @@ class Window(QWidget):
         self.update()
 
     def check_arrow(self, event):
+        print(self.z)
         if self.z <= 21 and self.z >= 17:
             k = self.z / 100000
         elif self.z < 17 and self.z >= 14:
-            k = self.z / 5000
-        elif self.z < 14 and self.z >= 10:
-            k = self.z / 700
+            k = self.z / 10000
+        elif self.z < 14 and self.z >= 9:
+            k = self.z / 1000
         elif self.z < 10 and self.z >= 5:
-            k = self.z / 20
+            k = self.z / 30
         else:
             k = self.z * 2
         if event.key() == Qt.Key.Key_Down:
